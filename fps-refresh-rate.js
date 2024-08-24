@@ -1,5 +1,4 @@
 const fpsElement = document.getElementById('fps');
-const refreshRateElement = document.getElementById('refreshRate');
 
 let frameTimes = [];
 let lastTime = performance.now();
@@ -26,30 +25,5 @@ function calculateFPS(now) {
     requestAnimationFrame(calculateFPS);
 }
 
-function detectRefreshRate() {
-    let frames = 0;
-    let startTime = performance.now();
-
-    function countFrames() {
-        frames++;
-        const now = performance.now();
-        const elapsed = now - startTime;
-
-        if (elapsed >= 1000) {
-            const refreshRate = frames * (1000 / elapsed);
-            refreshRateElement.textContent = refreshRate.toFixed(2) + ' Hz';
-            frames = 0;
-            startTime = now;
-        }
-
-        requestAnimationFrame(countFrames);
-    }
-
-    countFrames();
-}
-
 // Start the FPS calculation
 requestAnimationFrame(calculateFPS);
-
-// Detect the refresh rate
-detectRefreshRate();
